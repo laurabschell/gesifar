@@ -1,0 +1,14 @@
+@import "../../styles/functions";
+
+.loginForm {
+  width: toRem(500);
+  height: toRem(550);
+  background: linear-gradient(
+    161.55deg,
+    rgba(255, 255, 255, 0.68) 4.43%,
+    rgba(255, 255, 255, 0.58) 94.24%
+  );
+  mix-blend-mode: hard-light;
+  backdrop-filter: blur(40px);
+  border-radius: toRem(40);
+}
