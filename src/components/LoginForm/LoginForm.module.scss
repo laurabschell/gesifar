@@ -1,14 +1,46 @@
 @import "../../styles/functions";
 
 .loginForm {
-  width: toRem(500);
-  height: toRem(550);
+  height: toRem(500);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     161.55deg,
-    rgba(255, 255, 255, 0.68) 4.43%,
-    rgba(255, 255, 255, 0.58) 94.24%
+    rgba(255, 255, 255, 0.47) 4.43%,
+    rgba(255, 255, 255, 0.497) 94.24%
   );
   mix-blend-mode: hard-light;
   backdrop-filter: blur(40px);
-  border-radius: toRem(40);
+  border-radius: toRem(30);
+  display: flex;
+  flex-direction: column;
+  &_title {
+    font-family: Roboto;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    color: #f7f7f7;
+    margin: 0 0 2rem 0;
+  }
+  &_container {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    padding: 2rem;
+  }
+  &_fieldContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 1rem;
+    & > p {
+      font-family: "Roboto";
+      color: white;
+      font-weight: 500;
+      font-size: 12px;
+    }
+  }
+  &_input {
+    width: 100%;
+  }
 }
