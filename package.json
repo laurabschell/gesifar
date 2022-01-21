@@ -2,6 +2,7 @@
   "name": "gesifar-react",
   "version": "0.1.0",
   "private": true,
+   "homepage": "http://pruebasrasp.tplinkdns.com/gesifar",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^11.2.7",
