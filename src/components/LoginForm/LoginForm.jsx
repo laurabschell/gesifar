@@ -3,22 +3,16 @@ import style from "./LoginForm.module.scss"
 
 const LoginForm = () => {
     return (
-        <form className={style.loginForm}>
-            <div className={style.loginForm_title}>Ingreso</div>
-            <div className={style.loginForm_container}>
-                <div className={style.loginForm_fieldContainer}>
-                    <p>Usuario*</p>
-                    <input type="text" className={style.loginForm_input}/>
-                </div>
-                <div className={style.loginForm_fieldContainer}>
-                    <p>Contraseña*</p>
-                    <input type="password" className={style.loginForm_input}/>
-                </div>
-                <a href="/#" className={style.loginForm_link__terms}>Renovar contraeña</a>
-            </div>
-            <button type="submit">Ingresar</button>
-            <a href="/#"className={style.loginForm_link__terms}>Políticas y condiciones</a>
-        </form>
+        <div className={style.container}>
+            <div className={style.title}>Ingreso</div>
+            <form className={style.form}>
+                <input type="text" placeholder="Usuario" required/>
+                <input type="password" placeholder="Contraseña" required/>
+                <a className={style.form_passwordLink} href="/#">Renovar contraeña</a>
+                <button className={style.form_submitButton} type="submit">Ingresar</button>
+                <a className={style.form_termsLink} href="/#">Políticas y condiciones</a>
+            </form>
+        </div>
     )
 }
 
