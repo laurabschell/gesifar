@@ -1,0 +1,15 @@
+@import "../../styles/functions";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
+
+.main {
+    background-color: white;
+
+}
+
+.box {
+    background: rgba(40, 170, 224, 0.1);
+    border-radius: 30px;
+    margin: 1rem 1rem 1rem 18vw;
+    padding: 2rem;
+    height: 88vh;
+}

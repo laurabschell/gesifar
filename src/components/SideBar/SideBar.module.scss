@@ -1,0 +1,50 @@
+@import "../../styles/functions";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
+
+.container {
+    background-color: #ffffff;
+    // height: 100%;
+    width: 18vw;
+    position: fixed;
+}
+
+.imageBox {
+    display: flex;
+    margin: 0 0 4rem 0;
+
+    &_img {
+        width: 100px;
+        margin: 0 auto;
+    }
+}
+
+.menu {
+    >ul {
+        padding: 0;
+    }
+
+    &Button {
+        margin: 3rem;
+        text-align: center;
+        list-style-type: none;
+        background: #F6921F;
+        box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        border: none;
+        padding: .8rem;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+
+        &:hover,
+        :active {
+            box-shadow: none;
+            background: #f6921fd0;
+            box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.117);
+            transition: .2s;
+        }
+    }
+}
