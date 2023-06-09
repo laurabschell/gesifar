@@ -2,27 +2,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
 
 .boxesContainer {
+    width: 50%;
+    margin: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .box {
-    background: #FFD595;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+    background: #6dc3e8;
+    box-shadow: 0px 1px 2px hsla(0, 0%, 0%, 0.251);
     border-radius: 10px;
     width: 250px;
     padding: 1rem;
+    margin: 1rem auto;
+    cursor: pointer;
+    text-decoration: none;
 
     &Title {
         display: flex;
+        text-align: center;
+        color: #000000;
+        text-decoration: none;
+
 
         >h1 {
             margin: 0 .5rem 0 0;
             font-family: 'Roboto';
             font-style: normal;
             font-weight: 600;
-            font-size: 50px;
+            font-size: 20px;
             display: flex;
+            text-decoration: none;
         }
 
         >bold {

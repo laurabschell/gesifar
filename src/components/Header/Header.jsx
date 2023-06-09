@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Header.module.scss'
-import UserDefault from '../../assets/user-default.png'
+import UserDefault from '../../assets/user-image.png'
 
 const Header = () => {
   return (
@@ -9,8 +9,7 @@ const Header = () => {
       <div className={style.userBadge}>
         <img src={UserDefault} alt="user img" />
         <div className={style.userBadge_text}>
-          <h4>Javier Medina</h4>
-          <p>Supervisor</p>
+          <h4>Laura Schell</h4>
         </div>
       </div>
     </div>

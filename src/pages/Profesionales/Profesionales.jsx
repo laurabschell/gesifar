@@ -2,12 +2,12 @@ import React from 'react'
 import IncomeForm from '../../components/IncomeForm/IncomeForm'
 import Layout from '../../components/Layout/Layout'
 
-const IncomePage = () => {
+const Profesionales = () => {
     return (
         <Layout>
-            <IncomeForm />
+            Profesionales
         </Layout>
     )
 }
 
-export default IncomePage
+export default Profesionales

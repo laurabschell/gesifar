@@ -2,7 +2,6 @@ import { Checkbox, FormControl, TextField, Button } from '@mui/material'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import React from 'react'
-import style from './IncomeForm.module.scss'
 
 const IncomeForm = () => {
     return (

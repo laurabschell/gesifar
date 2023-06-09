@@ -2,12 +2,12 @@ import React from 'react'
 import DeliveryForm from '../../components/DeliveryForm/DeliveryForm'
 import Layout from '../../components/Layout/Layout'
 
-const DeliveryPage = () => {
+const Movimientos = () => {
     return (
         <Layout>
-            <DeliveryForm />
+            Movimientos
         </Layout>
     )
 }
 
-export default DeliveryPage
+export default Movimientos

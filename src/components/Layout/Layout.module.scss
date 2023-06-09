@@ -2,13 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
 
 .main {
-    background-color: white;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        linear-gradient(0deg, rgba(0, 117, 255, 0.65), rgba(0, 117, 255, 0.65)),
+        url("../../assets/bgImg.jpg") center center;
+    background-size: cover;
+    overflow: hidden;
 
 }
 
 .box {
-    background: rgba(40, 170, 224, 0.1);
-    border-radius: 30px;
+    background: hsla(198, 75%, 52%, 0.60);
+    border-radius: 10px;
     margin: 1rem 1rem 1rem 18vw;
     padding: 2rem;
     height: 88vh;
