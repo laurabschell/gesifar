@@ -13,12 +13,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="gestiones" element={<Gestiones/>} />
-        <Route path="movimientos" element={<Movimientos />} />
-        <Route path="profesionales" element={<Profesionales />} />
-        <Route path="personal" element={<Personal />} />
-        <Route path="stock" element={<Stock />} />
-        <Route path="ordenCompra" element={<OrdenCompra/>} />
+        <Route path="/gestiones" element={<Gestiones/>} />
+        <Route path="/movimientos" element={<Movimientos />} />
+        <Route path="/profesionales" element={<Profesionales />} />
+        <Route path="/personal" element={<Personal />} />
+        <Route path="/stock" element={<Stock />} />
+        <Route path="/ordenCompra" element={<OrdenCompra/>} />
       </Routes>
     </BrowserRouter>
   );

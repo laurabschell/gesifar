@@ -4,6 +4,13 @@ import style from './Gestiones.module.scss'
 import {
   Link
 } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+console.log(cookies.get('id'));
+console.log(cookies.get('nombre'));
+console.log(cookies.get('apellido'));
+console.log(cookies.get('username'));
 
 const Gestiones = () => {
   return (
