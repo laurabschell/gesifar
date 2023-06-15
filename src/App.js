@@ -7,6 +7,8 @@ import Profesionales from "./pages/Profesionales/Profesionales";
 import Personal from "./pages/Personal/Personal";
 import Stock from "./pages/Stock/Stock";
 import OrdenCompra from "./pages/OrdenCompra/OrdenCompra";
+import RegistrarProfesional from "./pages/RegistrarProfesional/RegistrarProfesional";
+import ConsultarProfesional from "./pages/ConsultarProfesional/ConsultarProfesional";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
         <Route path="/profesionales" element={<Profesionales />} />
         <Route path="/personal" element={<Personal />} />
         <Route path="/stock" element={<Stock />} />
-        <Route path="/ordenCompra" element={<OrdenCompra/>} />
+        <Route path="/orden-compra" element={<OrdenCompra />} />
+         <Route path="/registrar-profesional" element={<RegistrarProfesional/>} />
+         <Route path="/consultar-profesional" element={<ConsultarProfesional/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,59 +1,131 @@
-import React, { useState } from 'react'
-import {
-    Link
-} from "react-router-dom";
+import React, { useState, useEffect } from 'react'
 import style from "./LoginForm.module.scss"
-import { Button, TextField } from '@mui/material';
 import axios from 'axios';
-import md5 from 'md5';
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
 
 const LoginForm = () => {
-    const [body, setBody] = useState({ username: '', password: '' })
+    const [usuarios, setUsuarios] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [formData, setFormData] = useState({
+        apellido: "",
+        nombre: "",
+        username: "",
+        password: "",
+    });
+    const [selectedUser, setSelectedUser] = useState(null);
 
-    const inputChange = ({ target }) => {
-        const { name, value } = target
-        setBody({
-            ...body,
-            [name]: value
-        })
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get("http://localhost:3001/usuarios");
+            setUsuarios(response.data);
+            setIsLoading(false);
+        } catch (error) {
+            setError(error);
+            setIsLoading(false);
+        }
+    };
+
+    const handleInputChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            if (selectedUser) {
+                const response = await axios.put(
+                    `http://localhost:3001/usuarios/${selectedUser.id}`,
+                    formData
+                );
+                setUsuarios(
+                    usuarios.map((user) =>
+                        user.id === response.data.id ? response.data : user
+                    )
+                );
+                setSelectedUser(null);
+            } else {
+                const response = await axios.post(
+                    "http://localhost:3001/usuarios",
+                    formData
+                );
+                setUsuarios([...usuarios, response.data]);
+            }
+            setFormData({
+                apellido: "",
+                nombre: "",
+                username: "",
+                password: "",
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3001/usuarios/${id}`);
+            setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleEdit = (user) => {
+        setSelectedUser(user);
+        setFormData({
+            apellido: user.apellido,
+            nombre: user.nombre,
+            username: user.username,
+            password: user.password,
+        });
+    };
+
+    const handleNew = () => {
+        setSelectedUser(null);
+        setFormData({
+            apellido: "",
+            nombre: "",
+            username: "",
+            password: "",
+        });
+    };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
 
-    const onSubmit = () => {
-        axios.get('http://localhost:3001/usuarios', { params: { username: body.username, password: md5(body.password) } })
-            .then(({ data }) => {
-                console.log(data);
-            })
-            .then(response => {
-                if (response.length > 0) {
-                    var respuesta = response[0];
-                    cookies.set('id', respuesta.id, { path: "/" });
-                    cookies.set('npmbre', respuesta.nombre, { path: "/" });
-                    cookies.set('apellido', respuesta.apellido, { path: "/" });
-                    cookies.set('username', respuesta.username, { path: "/" });
-                    alert(`Bienvenido ${respuesta.nombre} ${respuesta.apellido}`);
-                    window.location.href = "./gestiones";
-                } else {
-                    alert('El usuario o la contrasena son incorrectos')
-                }
-            }
-            )
-            .catch(error => {
-                console.log(error)
-            })
+    if (error) {
+        return <div>Error: {error.message}</div>;
     }
 
     return (
         <div className={style.container}>
             <div className={style.title}>Ingreso</div>
-            <form className={style.form}>
-                <input name='username' onChange={inputChange} style={{ width: '100%' }} className={style.input} placeholder="Email" value={body.username} />
-                <input name='password' onChange={inputChange} style={{ width: '100%' }} className={style.input} placeholder="Contrasena" type="password" value={body.password} />
-                {/* <TextField name='username' onChange={inputChange} fullWidth size="medium" style={{ width: '100%' }} margin="normal" className={style.input} label="Email" value={body.username} />
-                <TextField name='password' onChange={inputChange} fullWidth size="medium" style={{ width: '100%' }} margin="normal" className={style.input} label="Contrasena" type="password" value={body.password} /> */}
-                <button onClick={onSubmit}>Ingresar</button>
+            <form className={style.form} onSubmit={handleSubmit} >
+                <input
+                    style={{ width: '100%' }}
+                    className={style.input}
+                    placeholder="Email"
+                    type="email"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    style={{ width: '100%' }}
+                    className={style.input}
+                    placeholder="Contrasena"
+                />
+                <button onClick={handleSubmit}>Ingresar</button>
             </form>
         </div >
     )
