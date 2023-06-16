@@ -4,14 +4,14 @@
 
 .title {
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.804);
+    color: #072240;
 }
 
 .subtext {
     padding: 2rem;
     text-decoration: underline;
     font-size: 17px;
-    color: rgba(255, 255, 255, 0.804);
+    color: #072240;
 }
 
 .buttons {
@@ -21,12 +21,12 @@
     border-radius: 40px;
 
     button {
-        background-color: rgba(255, 255, 255, 0.804);
+        background-color: #e67b00;
         padding: 1.3rem;
         font-family: 'Roboto';
         font-size: 15px;
         text-align: right;
-        color: rgba(0, 0, 0, 0.772);
+        color: white;
         border: none;
         text-decoration: none;
         text-transform: uppercase;
@@ -39,7 +39,7 @@
 
         &:hover {
             transition: 300ms;
-            background-color: #e67b00;
+            background-color: #072240;
             color: white;
         }
     }

@@ -1,35 +1,39 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
 import style from './RegistrarProfForm.module.scss'
-import { FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
 
 const RegistrarProfForm = () => {
     return (
         <Layout>
             <div className={style.title}>Gestion de Profesionales Solicitantes</div>
             <div className={style.subtext}>Complete los campos con los datos a registrar:</div>
-            <div className={style.fieldContainer}>
-                <label for="DNI">DNI</label>
-                <input label="DNI" id="DNI" variant="outlined" />
-                <label for="Nombre">Nombre</label>
-                <input label="Nombre" id="Nombre" variant="outlined" />
-                <label for="Apellido">Apellido</label>
-                <input label="Apellido" id="Apellido" variant="outlined" />
+            <div className={style.formContainer}>
+                <div className={style.fieldContainer}>
+                    <label for="DNI">DNI</label>
+                    <input label="DNI" id="DNI" variant="outlined" />
+                    <label for="Nombre">Nombre</label>
+                    <input label="Nombre" id="Nombre" variant="outlined" />
+                    <label for="Apellido">Apellido</label>
+                    <input label="Apellido" id="Apellido" variant="outlined" />
+                </div>
+
+                <FormControl className={style.radioButtons}>
+                    <FormLabel id="demo-radio-buttons-group-label">Profesion</FormLabel>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                    >
+                        <FormControlLabel value="female" control={<Radio />} label="Enfermero/a" />
+                        <FormControlLabel value="male" control={<Radio />} label="Medico/a" />
+                        <FormControlLabel value="other" control={<Radio />} label="Otro" />
+                    </RadioGroup>
+                </FormControl>
+
             </div>
 
-            <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Profesion</FormLabel>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                >
-                    <FormControlLabel value="female" control={<Radio />} label="Enfermero/a" />
-                    <FormControlLabel value="male" control={<Radio />} label="Medico/a" />
-                    <FormControlLabel value="other" control={<Radio />} label="Otro" />
-                </RadioGroup>
-            </FormControl>
-            <FormControl fullWidth>
+            <FormControl fullWidth className={style.dropdown}>
                 <InputLabel id="demo-simple-select-label">Area</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
@@ -43,6 +47,8 @@ const RegistrarProfForm = () => {
                     <MenuItem value={30}>Odontologia</MenuItem>
                 </Select>
             </FormControl>
+
+            <button>Registrar</button>
         </Layout>
     )
 }
