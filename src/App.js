@@ -11,11 +11,13 @@ import RegistrarProfesional from "./pages/RegistrarProfesional/RegistrarProfesio
 import ConsultarProfesional from "./pages/ConsultarProfesional/ConsultarProfesional";
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/gestiones" element={<Gestiones/>} />
+            <Route path="/" element={<Login />} />
+            <Route path="/gestiones" element={<Gestiones/>} />
         <Route path="/movimientos" element={<Movimientos />} />
         <Route path="/profesionales" element={<Profesionales />} />
         <Route path="/personal" element={<Personal />} />

@@ -1,70 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import style from "./LoginForm.module.scss"
 import axios from 'axios';
+import Gestiones from '../../pages/Gestiones/Gestiones';
+import { Link } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ setUser }) => {
     const [usuarios, setUsuarios] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [formData, setFormData] = useState({
-        apellido: "",
-        nombre: "",
-        username: "",
-        password: "",
-    });
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [error, setError] = useState(false);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const fetchData = async () => {
-        setIsLoading(true);
-        try {
-            const response = await axios.get("http://gesifar-api/usuarios");
-            setUsuarios(response.data);
-            setIsLoading(false);
-        } catch (error) {
-            setError(error);
-            setIsLoading(false);
-        }
-    };
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
 
-    const handleInputChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-    };
+    // const fetchData = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         const response = await axios.get("http://gesifar-api/usuarios");
+    //         setUsuarios(response.data);
+    //         setIsLoading(false);
+    //     } catch (error) {
+    //         setError(error);
+    //         setIsLoading(false);
+    //     }
+    // };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            if (selectedUser) {
-                const response = await axios.put(
-                    `http://gesifar-api/usuarios/${selectedUser.id}`,
-                    formData
-                );
-                setUsuarios(
-                    usuarios.map((user) =>
-                        user.id === response.data.id ? response.data : user
-                    )
-                );
-                setSelectedUser(null);
-            } else {
-                const response = await axios.post(
-                    "http://gesifar-api/usuarios",
-                    formData
-                );
-                setUsuarios([...usuarios, response.data]);
-            }
-            setFormData({
-                apellido: "",
-                nombre: "",
-                username: "",
-                password: "",
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+
+    //     if (email === "" || password === "") {
+    //         setError(true)
+    //         return
+    //     } else {
+
+    //         setError(false)
+
+    //     }
+
+    //     setUser([email]);
+    // };
 
     // if (isLoading) {
     //     return <div>Loading...</div>;
@@ -77,27 +54,34 @@ const LoginForm = () => {
     return (
         <div className={style.container}>
             <div className={style.title}>Ingreso</div>
-            <form className={style.form} onSubmit={handleSubmit} >
+            <form className={style.form} >
                 <input
                     style={{ width: '100%' }}
                     className={style.input}
                     placeholder="Email"
                     type="email"
                     name="username"
-                    value={formData.username}
-                    onChange={handleInputChange}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
                 />
                 <input
                     type="password"
                     name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     style={{ width: '100%' }}
                     className={style.input}
                     placeholder="Contrasena"
+                    required
                 />
-                <button onClick={handleSubmit}>Ingresar</button>
+                <Link style={{ textDecoration: 'none' }} to="/gestiones">
+                    <button >Ingresar</button>
+                </Link>
             </form>
+            {/* {error &&
+                <div>Completa los campos para ingresar</div>
+            } */}
         </div >
     )
 }
