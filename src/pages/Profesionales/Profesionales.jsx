@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
-import { Button } from '@mui/material'
 import style from "./Profesionales.module.scss"
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -10,11 +8,13 @@ import { show_alerta } from '../../functions';
 
 const Profesionales = () => {
     const url = 'http://gesifar-api.test/profesionalesController.php';
-    const [products, setProducts] = useState([]);
+    const [professionals, setProfessionals] = useState([]);
     const [id, setId] = useState('');
+    const [dni, setDni] = useState('');
     const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [profesion, setProfesion] = useState('');
+    const [area, setArea] = useState('');
     const [operation, setOperation] = useState(1);
     const [title, setTitle] = useState('');
 
@@ -24,23 +24,27 @@ const Profesionales = () => {
 
     const getProducts = async () => {
         const respuesta = await axios.get(url);
-        setProducts(respuesta.data);
+        setProfessionals(respuesta.data);
     }
-    const openModal = (op, id, name, description, price) => {
+    const openModal = (op, id, dni, name, lastname, profesion, area) => {
         setId('');
+        setDni('');
         setName('');
-        setDescription('');
-        setPrice('');
+        setLastname('');
+        setProfesion('');
+        setArea('');
         setOperation(op);
         if (op === 1) {
-            setTitle('Registrar Producto');
+            setTitle('Registrar Profesional');
         }
         else if (op === 2) {
-            setTitle('Editar Producto');
+            setTitle('Editar Datos');
             setId(id);
+            setDni(dni);
             setName(name);
-            setDescription(description);
-            setPrice(price);
+            setLastname(lastname);
+            setProfesion(profesion);
+            setArea(area);
         }
         window.setTimeout(function () {
             document.getElementById('nombre').focus();
@@ -49,22 +53,28 @@ const Profesionales = () => {
     const validar = () => {
         var parametros;
         var metodo;
-        if (name.trim() === '') {
-            show_alerta('Escribe el nombre del producto', 'warning');
+        if (dni.trim() === '') {
+            show_alerta('Escribe el DNI del profesional', 'warning');
         }
-        else if (description.trim() === '') {
-            show_alerta('Escribe la descripción del producto', 'warning');
+        else if (name.trim() === '') {
+            show_alerta('Escribe el nombre del profesional', 'warning');
         }
-        else if (price === '') {
-            show_alerta('Escribe el precio del producto', 'warning');
+        else if (lastname.trim() === '') {
+            show_alerta('Escribe el apellido del profesional', 'warning');
+        }
+        else if (profesion.trim() === '') {
+            show_alerta('Escribe la profesion del profesional', 'warning');
+        }
+        else if (area === '') {
+            show_alerta('Escribe el area del profesional', 'warning');
         }
         else {
             if (operation === 1) {
-                parametros = { name: name.trim(), description: description.trim(), price: price };
+                parametros = { dni: dni.trim(), name: name.trim(), lastname: lastname.trim(), profesion: profesion.trim(), area: area.trim() };
                 metodo = 'POST';
             }
             else {
-                parametros = { id: id, name: name.trim(), description: description.trim(), price: price };
+                parametros = { id: id, dni: dni.trim(), name: name.trim(), lastname: lastname.trim(), profesion: profesion.trim(), area: area.trim() };
                 metodo = 'PUT';
             }
             envarSolicitud(metodo, parametros);
@@ -85,10 +95,11 @@ const Profesionales = () => {
                 console.log(error);
             });
     }
+
     const deleteProduct = (id, name) => {
         const MySwal = withReactContent(Swal);
         MySwal.fire({
-            title: '¿Seguro de eliminar el producto ' + name + ' ?',
+            title: '¿Seguro de eliminar el profesional ' + name + ' ?',
             icon: 'question', text: 'No se podrá dar marcha atrás',
             showCancelButton: true, confirmButtonText: 'Si, eliminar', cancelButtonText: 'Cancelar'
         }).then((result) => {
@@ -97,7 +108,7 @@ const Profesionales = () => {
                 envarSolicitud('DELETE', { id: id });
             }
             else {
-                show_alerta('El producto NO fue eliminado', 'info');
+                show_alerta('Los datos del profesional NO fueron eliminados', 'info');
             }
         });
     }
@@ -106,39 +117,48 @@ const Profesionales = () => {
     return (
         <Layout>
             <div className={style.title}>Gestion de Profesionales Solicitantes</div>
-            <div className={style.subtext}>Por favor, selecciona la accion a realizar:</div>
             <div className='container-fluid'>
-                <div className='row mt-3'>
-                    <div className='col-md-4 offset-md-4'>
+                <div className='row mt-4'>
+                    <div className='col-md-6 offset-md-2'>
                         <div className='d-grid mx-auto'>
                             <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
-                                <i className='fa-solid fa-circle-plus'></i> Añadir
+                                <i className='fa-solid fa-circle-plus'></i> Añadir nuevo profesional
                             </button>
                         </div>
                     </div>
                 </div>
-                <div className='row mt-3'>
+                <div className='row mt-4'>
                     <div className='col-12 col-lg-8 offset-0 offset-lg-2'>
                         <div className='table-responsive'>
                             <table className='table table-bordered'>
                                 <thead>
-                                    <tr><th>#</th><th>PRODUCTO</th><th>DESCRIPCION</th><th>PRECIO</th><th></th></tr>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>DNI</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>PROFESION</th>
+                                        <th>AREA</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody className='table-group-divider'>
-                                    {products.map((product, i) => (
-                                        <tr key={product.id}>
+                                    {professionals.map((professional, i) => (
+                                        <tr key={professional.id}>
                                             <td>{(i + 1)}</td>
-                                            <td>{product.name}</td>
-                                            <td>{product.description}</td>
-                                            <td>${new Intl.NumberFormat('es-mx').format(product.price)}</td>
+                                            <td>{professional.dni}</td>
+                                            <td>{professional.name}</td>
+                                            <td>{professional.lastname}</td>
+                                            <td>{professional.profesion}</td>
+                                            <td>{professional.area}</td>
                                             <td>
-                                                <button onClick={() => openModal(2, product.id, product.name, product.description, product.price)}
+                                                <button onClick={() => openModal(2, professional.id, professional.dni, professional.name, professional.lastname, professional.profesion, professional.area)}
                                                     className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalProducts'>
-                                                    <i className='fa-solid fa-edit'></i>
+                                                    <i className='fa-solid fa-edit'></i> Editar
                                                 </button>
                                                 &nbsp;
-                                                <button onClick={() => deleteProduct(product.id, product.name)} className='btn btn-danger'>
-                                                    <i className='fa-solid fa-trash'></i>
+                                                <button onClick={() => deleteProduct(professional.id, professional.name)} className='btn btn-danger'>
+                                                    <i className='fa-solid fa-trash'></i> Eliminar
                                                 </button>
                                             </td>
                                         </tr>
@@ -159,20 +179,30 @@ const Profesionales = () => {
                         </div>
                         <div className='modal-body'>
                             <input type='hidden' id='id'></input>
-                            <div className='input-group mb-3'>
+                            <div className='input-group mb-5'>
+                                <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                                <input type='text' id='dni' className='form-control' placeholder='DNI' value={dni}
+                                    onChange={(e) => setDni(e.target.value)}></input>
+                            </div>
+                            <div className='input-group mb-5'>
                                 <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
                                 <input type='text' id='nombre' className='form-control' placeholder='Nombre' value={name}
                                     onChange={(e) => setName(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-comment'></i></span>
-                                <input type='text' id='descripcion' className='form-control' placeholder='Descripción' value={description}
-                                    onChange={(e) => setDescription(e.target.value)}></input>
+                            <div className='input-group mb-5'>
+                                <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                                <input type='text' id='apellido' className='form-control' placeholder='Apellido' value={lastname}
+                                    onChange={(e) => setLastname(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-3'>
+                            <div className='input-group mb-5'>
+                                <span className='input-group-text'><i className='fa-solid fa-comment'></i></span>
+                                <input type='text' id='profesion' className='form-control' placeholder='Profesion' value={profesion}
+                                    onChange={(e) => setProfesion(e.target.value)}></input>
+                            </div>
+                            <div className='input-group mb-5'>
                                 <span className='input-group-text'><i className='fa-solid fa-dollar-sign'></i></span>
-                                <input type='text' id='precio' className='form-control' placeholder='Precio' value={price}
-                                    onChange={(e) => setPrice(e.target.value)}></input>
+                                <input type='text' id='area' className='form-control' placeholder='Area' value={area}
+                                    onChange={(e) => setArea(e.target.value)}></input>
                             </div>
                             <div className='d-grid col-6 mx-auto'>
                                 <button onClick={() => validar()} className='btn btn-success'>
