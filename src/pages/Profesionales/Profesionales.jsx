@@ -119,21 +119,21 @@ const Profesionales = () => {
             <div className={style.title}>Gestion de Profesionales Solicitantes</div>
             <div className='container-fluid'>
                 <div className='row mt-4'>
-                    <div className='col-md-6 offset-md-2'>
+                    <div className='col-md-4 offset-md-9'>
                         <div className='d-grid mx-auto'>
-                            <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
+                            <button onClick={() => openModal(1)} className='btn btn-lg btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
                                 <i className='fa-solid fa-circle-plus'></i> Añadir nuevo profesional
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className='row mt-4'>
-                    <div className='col-12 col-lg-8 offset-0 offset-lg-2'>
+                    <div className='col-12 col-lg-12 offset-0'>
                         <div className='table-responsive'>
                             <table className='table table-bordered'>
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        {/* <th>id</th> */}
                                         <th>DNI</th>
                                         <th>NOMBRE</th>
                                         <th>APELLIDO</th>
@@ -145,21 +145,23 @@ const Profesionales = () => {
                                 <tbody className='table-group-divider'>
                                     {professionals.map((professional, i) => (
                                         <tr key={professional.id}>
-                                            <td>{(i + 1)}</td>
+                                            {/* <td>{(i + 1)}</td> */}
                                             <td>{professional.dni}</td>
                                             <td>{professional.name}</td>
                                             <td>{professional.lastname}</td>
                                             <td>{professional.profesion}</td>
                                             <td>{professional.area}</td>
                                             <td>
-                                                <button onClick={() => openModal(2, professional.id, professional.dni, professional.name, professional.lastname, professional.profesion, professional.area)}
-                                                    className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalProducts'>
-                                                    <i className='fa-solid fa-edit'></i> Editar
-                                                </button>
-                                                &nbsp;
-                                                <button onClick={() => deleteProduct(professional.id, professional.name)} className='btn btn-danger'>
-                                                    <i className='fa-solid fa-trash'></i> Eliminar
-                                                </button>
+                                                <div class="btn-group" role="group">
+
+                                                    <button onClick={() => openModal(2, professional.id, professional.dni, professional.name, professional.lastname, professional.profesion, professional.area)}
+                                                        className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalProducts'>
+                                                        <i className='fa-solid fa-edit'></i> Editar
+                                                    </button>
+                                                    <button onClick={() => deleteProduct(professional.id, professional.name)} className='btn btn-danger'>
+                                                        <i className='fa-solid fa-trash'></i>
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))
@@ -179,27 +181,27 @@ const Profesionales = () => {
                         </div>
                         <div className='modal-body'>
                             <input type='hidden' id='id'></input>
-                            <div className='input-group mb-5'>
+                            <div className='input-group mb-3'>
                                 <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
                                 <input type='text' id='dni' className='form-control' placeholder='DNI' value={dni}
                                     onChange={(e) => setDni(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-5'>
+                            <div className='input-group mb-3'>
                                 <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
                                 <input type='text' id='nombre' className='form-control' placeholder='Nombre' value={name}
                                     onChange={(e) => setName(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-5'>
+                            <div className='input-group mb-3'>
                                 <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
                                 <input type='text' id='apellido' className='form-control' placeholder='Apellido' value={lastname}
                                     onChange={(e) => setLastname(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-5'>
+                            <div className='input-group mb-3'>
                                 <span className='input-group-text'><i className='fa-solid fa-comment'></i></span>
                                 <input type='text' id='profesion' className='form-control' placeholder='Profesion' value={profesion}
                                     onChange={(e) => setProfesion(e.target.value)}></input>
                             </div>
-                            <div className='input-group mb-5'>
+                            <div className='input-group mb-3'>
                                 <span className='input-group-text'><i className='fa-solid fa-dollar-sign'></i></span>
                                 <input type='text' id='area' className='form-control' placeholder='Area' value={area}
                                     onChange={(e) => setArea(e.target.value)}></input>
