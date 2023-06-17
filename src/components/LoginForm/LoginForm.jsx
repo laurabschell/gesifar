@@ -66,42 +66,13 @@ const LoginForm = () => {
         }
     };
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`http://localhost:3001/usuarios/${id}`);
-            setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
-    const handleEdit = (user) => {
-        setSelectedUser(user);
-        setFormData({
-            apellido: user.apellido,
-            nombre: user.nombre,
-            username: user.username,
-            password: user.password,
-        });
-    };
-
-    const handleNew = () => {
-        setSelectedUser(null);
-        setFormData({
-            apellido: "",
-            nombre: "",
-            username: "",
-            password: "",
-        });
-    };
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+    // if (error) {
+    //     return <div>Error: {error.message}</div>;
+    // }
 
     return (
         <div className={style.container}>
