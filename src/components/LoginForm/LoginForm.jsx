@@ -21,7 +21,7 @@ const LoginForm = () => {
     const fetchData = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get("http://localhost:3001/usuarios");
+            const response = await axios.get("http://gesifar-api/usuarios");
             setUsuarios(response.data);
             setIsLoading(false);
         } catch (error) {
@@ -39,7 +39,7 @@ const LoginForm = () => {
         try {
             if (selectedUser) {
                 const response = await axios.put(
-                    `http://localhost:3001/usuarios/${selectedUser.id}`,
+                    `http://gesifar-api/usuarios/${selectedUser.id}`,
                     formData
                 );
                 setUsuarios(
@@ -50,7 +50,7 @@ const LoginForm = () => {
                 setSelectedUser(null);
             } else {
                 const response = await axios.post(
-                    "http://localhost:3001/usuarios",
+                    "http://gesifar-api/usuarios",
                     formData
                 );
                 setUsuarios([...usuarios, response.data]);
