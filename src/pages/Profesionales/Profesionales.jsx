@@ -182,27 +182,27 @@ const Profesionales = () => {
                         <div className='modal-body'>
                             <input type='hidden' id='id'></input>
                             <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                                <span className='input-group-text'>DNI</span>
                                 <input type='text' id='dni' className='form-control' placeholder='DNI' value={dni}
                                     onChange={(e) => setDni(e.target.value)}></input>
                             </div>
                             <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                                <span className='input-group-text'>Nombre</span>
                                 <input type='text' id='nombre' className='form-control' placeholder='Nombre' value={name}
                                     onChange={(e) => setName(e.target.value)}></input>
                             </div>
                             <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-gift'></i></span>
+                                <span className='input-group-text'>Apellido</span>
                                 <input type='text' id='apellido' className='form-control' placeholder='Apellido' value={lastname}
                                     onChange={(e) => setLastname(e.target.value)}></input>
                             </div>
                             <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-comment'></i></span>
+                                <span className='input-group-text'>Profesion</span>
                                 <input type='text' id='profesion' className='form-control' placeholder='Profesion' value={profesion}
                                     onChange={(e) => setProfesion(e.target.value)}></input>
                             </div>
                             <div className='input-group mb-3'>
-                                <span className='input-group-text'><i className='fa-solid fa-dollar-sign'></i></span>
+                                <span className='input-group-text'>Area</span>
                                 <input type='text' id='area' className='form-control' placeholder='Area' value={area}
                                     onChange={(e) => setArea(e.target.value)}></input>
                             </div>
@@ -218,7 +218,7 @@ const Profesionales = () => {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </Layout >
     )
 }
 
