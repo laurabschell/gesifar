@@ -1,55 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import style from "./LoginForm.module.scss"
-import axios from 'axios';
-import Gestiones from '../../pages/Gestiones/Gestiones';
-import { Link } from 'react-router-dom';
 
-const LoginForm = ({ setUser }) => {
-    const [usuarios, setUsuarios] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
+const LoginForm = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
-    // const fetchData = async () => {
-    //     setIsLoading(true);
-    //     try {
-    //         const response = await axios.get("http://gesifar-api/usuarios");
-    //         setUsuarios(response.data);
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         setError(error);
-    //         setIsLoading(false);
-    //     }
-    // };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     if (email === "" || password === "") {
-    //         setError(true)
-    //         return
-    //     } else {
-
-    //         setError(false)
-
-    //     }
-
-    //     setUser([email]);
-    // };
-
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-
-    // if (error) {
-    //     return <div>Error: {error.message}</div>;
-    // }
+    const onSubmit = () => {
+        //console.log('email:' + email);
+        axios.post('http://localhost:4000/api/login', { email, password })
+            .then(({ data }) => {
+                console.log(data);
+                localStorage.setItem('user', JSON.stringify(data));
+                console.log('navigate /gestiones');
+                navigate('/gestiones');
+            })
+            .catch(({ response }) => { 
+                console.log(response.data);
+            })
+    }
 
     return (
         <div className={style.container}>
@@ -59,8 +31,8 @@ const LoginForm = ({ setUser }) => {
                     style={{ width: '100%' }}
                     className={style.input}
                     placeholder="Email"
-                    type="email"
-                    name="username"
+                    type="text"
+                    name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -72,16 +44,16 @@ const LoginForm = ({ setUser }) => {
                     onChange={e => setPassword(e.target.value)}
                     style={{ width: '100%' }}
                     className={style.input}
-                    placeholder="Contrasena"
+                    placeholder="Password"
                     required
-                />
-                <Link style={{ textDecoration: 'none' }} to="/gestiones">
-                    <button >Ingresar</button>
-                </Link>
+                />             
+                <button
+                    type="button"
+                    onClick={onSubmit}
+                    >
+                        Ingresar
+                    </button>             
             </form>
-            {/* {error &&
-                <div>Completa los campos para ingresar</div>
-            } */}
         </div >
     )
 }

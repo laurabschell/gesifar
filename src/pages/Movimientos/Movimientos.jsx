@@ -1,8 +1,7 @@
 import React from 'react'
-import DeliveryForm from '../../components/DeliveryForm/DeliveryForm'
 import Layout from '../../components/Layout/Layout'
 
-const Movimientos = () => {
+export const Movimientos = () => {
     return (
         <Layout>
             Movimientos
@@ -10,4 +9,4 @@ const Movimientos = () => {
     )
 }
 
-export default Movimientos
+//export default Movimientos

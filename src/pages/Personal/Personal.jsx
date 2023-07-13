@@ -1,8 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
-import style from './Personal.module.scss'
 
-const Personal = () => {
+export const Personal = () => {
     return (
         <Layout>
             Personal
@@ -10,4 +9,4 @@ const Personal = () => {
     )
 }
 
-export default Personal
+//export default Personal

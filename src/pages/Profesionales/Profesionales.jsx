@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../../functions';
 
-const Profesionales = () => {
+export const Profesionales = () => {
     const url = 'http://gesifar-api.test/profesionalesController.php';
     const [professionals, setProfessionals] = useState([]);
     const [id, setId] = useState('');
@@ -222,4 +222,4 @@ const Profesionales = () => {
     )
 }
 
-export default Profesionales
+//export default Profesionales

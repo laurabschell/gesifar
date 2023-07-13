@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
 
-const Stock = () => {
+export const Stock = () => {
     return (
         <Layout>
             Stock
@@ -9,4 +9,4 @@ const Stock = () => {
     )
 }
 
-export default Stock
+//export default Stock

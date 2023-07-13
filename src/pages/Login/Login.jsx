@@ -3,7 +3,7 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 import style from './Login.module.scss'
 import logo from "../../assets/logo.png"
 
-const Login = () => {
+export const Login = () => {
     return (
         <div className={style.page}>
             <div className={style.page_logoContainer}>
@@ -16,4 +16,4 @@ const Login = () => {
     )
 }
 
-export default Login
+//export default Login

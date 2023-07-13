@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
 
-const OrdenCompra = () => {
+export const OrdenCompra = () => {
     return (
         <Layout>
             <div>OrdenCompra</div>
@@ -9,4 +9,4 @@ const OrdenCompra = () => {
     )
 }
 
-export default OrdenCompra
+//export default OrdenCompra

@@ -1,11 +1,9 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
 import style from './Gestiones.module.scss'
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Gestiones = () => {
+export const Gestiones = () => {
   return (
     <Layout >
 
@@ -48,4 +46,4 @@ const Gestiones = () => {
   )
 }
 
-export default Gestiones
+//export default Gestiones

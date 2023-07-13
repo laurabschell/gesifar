@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
 import style from './RegistrarProfForm.module.scss'
-import { Button, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
+import { FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select } from '@mui/material'
 
 const RegistrarProfForm = () => {
     return (
