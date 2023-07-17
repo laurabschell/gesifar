@@ -7,7 +7,9 @@ import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../../functions';
 
 export const Profesionales = () => {
-    const url = 'http://gesifar-api.test/profesionalesController.php';
+    
+    const API_URL = 'http://gesifar-api.test/profesionalesController.php';
+    const [searchText, setSearchText] = useState('');    //const search=''
     const [professionals, setProfessionals] = useState([]);
     const [id, setId] = useState('');
     const [dni, setDni] = useState('');
@@ -19,13 +21,17 @@ export const Profesionales = () => {
     const [title, setTitle] = useState('');
 
     useEffect(() => {
-        getProducts();
+        getProfessionals();
     }, []);
 
-    const getProducts = async () => {
-        const respuesta = await axios.get(url);
+    const getProfessionals = async (search='') => {
+        
+        if (search) search = '?search=' + search;
+        const respuesta = await axios.get(API_URL + search);    
         setProfessionals(respuesta.data);
+
     }
+
     const openModal = (op, id, dni, name, lastname, profesion, area) => {
         setId('');
         setDni('');
@@ -77,17 +83,17 @@ export const Profesionales = () => {
                 parametros = { id: id, dni: dni.trim(), name: name.trim(), lastname: lastname.trim(), profesion: profesion.trim(), area: area.trim() };
                 metodo = 'PUT';
             }
-            envarSolicitud(metodo, parametros);
+            enviarSolicitud(metodo, parametros);
         }
     }
-    const envarSolicitud = async (metodo, parametros) => {
-        await axios({ method: metodo, url: url, data: parametros }).then(function (respuesta) {
+    const enviarSolicitud = async (metodo, parametros) => {
+        await axios({ method: metodo, url: API_URL, data: parametros }).then(function (respuesta) {
             var tipo = respuesta.data[0];
             var msj = respuesta.data[1];
             show_alerta(msj, tipo);
             if (tipo === 'success') {
                 document.getElementById('btnCerrar').click();
-                getProducts();
+                getProfessionals();
             }
         })
             .catch(function (error) {
@@ -96,7 +102,7 @@ export const Profesionales = () => {
             });
     }
 
-    const deleteProduct = (id, name) => {
+    const deleteProfessional = (id, name) => {
         const MySwal = withReactContent(Swal);
         MySwal.fire({
             title: '¿Seguro de eliminar el profesional ' + name + ' ?',
@@ -105,7 +111,7 @@ export const Profesionales = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setId(id);
-                envarSolicitud('DELETE', { id: id });
+                enviarSolicitud('DELETE', { id: id });
             }
             else {
                 show_alerta('Los datos del profesional NO fueron eliminados', 'info');
@@ -113,14 +119,30 @@ export const Profesionales = () => {
         });
     }
 
+    const search = () => {
+       
+        getProfessionals(searchText);
+    }
 
     return (
         <Layout>
             <div className={style.title}>Gestion de Profesionales Solicitantes</div>
             <div className='container-fluid'>
                 <div className='row mt-4'>
+       
                     <div className='col-md-4 offset-md-9'>
+
+                        <input type='text' id='search'
+                            className='form-control' placeholder='ingrese texto...'
+                            onChange={e => setSearchText(e.target.value)}>    
+                        </input>
+                        
+                        <button onClick={ search }>
+                            Search
+                        </button>
+
                         <div className='d-grid mx-auto'>
+                            
                             <button onClick={() => openModal(1)} className='btn btn-lg btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
                                 <i className='fa-solid fa-circle-plus'></i> Añadir nuevo profesional
                             </button>
@@ -158,7 +180,7 @@ export const Profesionales = () => {
                                                         className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalProducts'>
                                                         <i className='fa-solid fa-edit'></i> Editar
                                                     </button>
-                                                    <button onClick={() => deleteProduct(professional.id, professional.name)} className='btn btn-danger'>
+                                                    <button onClick={() => deleteProfessional(professional.id, professional.name)} className='btn btn-danger'>
                                                         <i className='fa-solid fa-trash'></i>
                                                     </button>
                                                 </div>
