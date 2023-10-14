@@ -17,7 +17,7 @@ const Header = () => {
         <img src={UserDefault} alt="user img" />
         <div className={style.userBadge_text}>
           <h4>{user.name} {user.lastname}</h4>
-          <h4>{user.email}</h4>
+          <p>{user.email}</p>
         </div>
         <button onClick={logout}>Logout</button>
       </div>
