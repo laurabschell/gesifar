@@ -18,7 +18,7 @@ const LoginForm = () => {
                 console.log('navigate /gestiones');
                 navigate('/gestiones');
             })
-            .catch(({ response }) => { 
+            .catch(({ response }) => {
                 console.log(response.data);
             })
     }
@@ -46,13 +46,13 @@ const LoginForm = () => {
                     className={style.input}
                     placeholder="Password"
                     required
-                />             
+                />
                 <button
                     type="button"
                     onClick={onSubmit}
-                    >
-                        Ingresar
-                    </button>             
+                >
+                    Ingresar
+                </button>
             </form>
         </div >
     )

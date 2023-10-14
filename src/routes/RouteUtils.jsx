@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-export const HomeRedirect = () => <Navigate to='/' />
+export const HomeRedirect = () => <Navigate to='/gestiones' />
 export const LoginRedirect = () => <Navigate to='/login' />
 
 export const renderRoutes = (routes, extraProps = {}, switchProps = {}) =>
