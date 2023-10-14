@@ -26,7 +26,7 @@ const LoginForm = () => {
     return (
         <div className={style.container}>
             <div className={style.title}>Ingreso</div>
-            <form className={style.form} autocomplete="off">
+            <form className={style.form} autoComplete="off">
                 <input
                     style={{ width: '100%' }}
                     className={style.input}
