@@ -27,7 +27,7 @@ export const Gestiones = () => {
           </div>
         </Link>
 
-        <Link className={style.box} to="/stock">
+        <Link className={style.box} to="/materiales">
           <div className={style.boxTitle}>
             <h1>Gestion de Stock</h1>
           </div>

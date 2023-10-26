@@ -152,7 +152,7 @@ export const Profesionales = () => {
                                             <td>{professional.profesion}</td>
                                             <td>{professional.area}</td>
                                             <td>
-                                                <div class="btn-group" role="group">
+                                                <div className="btn-group" role="group">
 
                                                     <button onClick={() => openModal(2, professional.id, professional.dni, professional.name, professional.lastname, professional.profesion, professional.area)}
                                                         className='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalProducts'>
